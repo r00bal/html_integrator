@@ -34,9 +34,10 @@ class App extends Component {
     const type = target.type;
     if (type === "radio" || target.htmlFor === "base") {
       const base = target.value || target.textContent;
-      const checkbox = this.state.checkbox.map(
-        box => (box.default.includes(base) ? box : { ...box, isChecked: false })
-      );
+      const checkbox = this.state.checkbox.map(box => ({
+        ...box,
+        isChecked: false
+      }));
       this.setState({
         radio: base,
         checkbox
