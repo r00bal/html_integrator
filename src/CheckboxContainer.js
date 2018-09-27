@@ -18,21 +18,22 @@ export class Checkbox extends Component {
     } else return null;
   }
 
-  sendState = (props, checked) => {
-    const name = props.name;
-    const value = props.value;
-    const id = props.id;
-    const isChecked = checked;
-    const proto = this.props.proto;
-    return { name, value, isChecked, id, proto };
-  };
+  // sendState = (props, checked) => {
+  //   const name = props.name;
+  //   const value = props.value;
+  //   const id = props.id;
+  //   const isChecked = checked;
+  //   const proto = this.props.proto;
+  //   return { name, value, isChecked, id, proto };
+  // };
 
   handleChange = event => {
     const isChecked = !this.state.isChecked;
+    const value = this.props.value;
     this.setState({
       isChecked: isChecked
     });
-    this.props.onChange(this.sendState(this.props, isChecked));
+    this.props.onChange({ value, isChecked });
   };
 
   renderInput = wr => {
@@ -74,7 +75,7 @@ export class CheckboxContainer extends Component {
 
   static getDerivedStateFromProps(update) {
     return {
-      checkboxes: update.isChecked,
+      checkboxes: update.checkboxes,
       defaultState: update.defaultState
     };
   }
@@ -87,113 +88,70 @@ export class CheckboxContainer extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const checked = !this.state.checkAll;
+    const isChecked = true;
     this.setState({
-      checkAll: checked
+      checkAll: isChecked
     });
-    const checkThisBoxes = this.returnProperCheckboxes(this.props.checkboxes);
-    console.log(checkThisBoxes);
-    // setInterval(function () {
-    //
-    //    ch(s(checkThisBoxes[i], checked))
-    //    if (i < checkThisBoxes.length -1) {
-    //      i++
-    //    }
-    // }, .000001);
+    const checkThisBoxes = this.returnProperCheckboxes(
+      this.state.checkboxes
+    ).map(box => {
+      const value = box.value;
+      return {
+        value,
+        isChecked
+      };
+    });
 
-    //this.props.onChange(this.sendState(checkThisBoxes, checked));
-    // for (let i = 0; i < checkThisBoxes.length -5; i++ ) {
-    //   console.log(checkThisBoxes[i]);
-    //   this.props.onChange(this.sendState(checkThisBoxes[i], checked))
-    // }
-    // checkThisBoxes.forEach(box =>
-    //   this.props.onChange(this.sendState(box, checked))
-    // );
-    //return this.props.onChange(this.sendState(box, checked))
-
-    //this.props.onChange(this.sendState(this.props, isChecked));
+    this.props.onChange(checkThisBoxes);
   };
 
-
-
   returnProperCheckboxes = boxes => {
-    return boxes.filter(box => {
-      //return this.state.defaultState === box.default || box.default === "ALL";
-      return (
+    console.log(boxes);
+    return boxes.filter(
+      box =>
         box.default.includes(this.state.defaultState) || box.default === "ALL"
-      );
-    });
+    );
   };
 
   choseYourBaseFirst = () => {
-    return (
-      <p>Choose your base first..</p>
-    )
-  }
-
-  // renderCheckBoxes = boxes => {
-  //   const checkboxes = this.returnProperCheckboxes(boxes);
-  //   return checkboxes.map((box, index) => {
-  //     return (
-  //       <Checkbox
-  //         isChecked={this.isChecked(this.state.checkboxes[box.value])}
-  //         key={index}
-  //         id={index}
-  //         name={box.name}
-  //         value={box.value}
-  //         onChange={this.props.onChange}
-  //         onWrChange={box.value == "addWR" ? this.props.onWrChange : null}
-  //         proto={box}
-  //       />
-  //     );
-  //   });
-  // };
+    return <p>Choose your base first..</p>;
+  };
 
   renderCheckBoxes = boxes => {
     const checkboxes = this.returnProperCheckboxes(boxes);
+    console.log(checkboxes);
 
-      return (
-<div>
-  <div className="container Box">
-        {checkboxes.map((box, index) => (
-          <Checkbox
-            isChecked={this.isChecked(this.state.checkboxes[box.value])}
-            key={index}
-            id={index}
-            name={box.name}
-            value={box.value}
-            onChange={this.props.onChange}
-            onWrChange={box.value == "addWR" ? this.props.onWrChange : null}
-            proto={box}
+    return (
+      <div>
+        <div className="container Box">
+          {checkboxes.map((box, index) => (
+            <Checkbox
+              isChecked={box.isChecked}
+              key={box.key}
+              id={index}
+              name={box.name}
+              value={box.value}
+              onChange={this.props.onChange}
+              onWrChange={box.value == "addWR" ? this.props.onWrChange : null}
+              proto={box}
             />
-        ))}
-    </div>
-  <Button name={"Check All"} onChange={this.handleSubmit} />
-  </div>
-      )
-
-
+          ))}
+        </div>
+        <Button name={"Check All"} onChange={this.handleSubmit} />
+      </div>
+    );
   };
 
   render() {
-    const checkboxes = this.props.checkboxes;
     return (
-      // <div>
-      //   <div className="container Box">{this.renderCheckBoxes(checkboxes)}</div>
-      //   {/* <Button name={"Check All"} onChange={this.handleSubmit} /> */}
-      // </div>
       <div className="container">
-
-        {(!!this.state.defaultState) ? this.renderCheckBoxes(checkboxes) : this.choseYourBaseFirst()}
-
-
-
+        {!!this.state.defaultState
+          ? this.renderCheckBoxes(this.state.checkboxes)
+          : this.choseYourBaseFirst()}
       </div>
-
     );
   }
 }
-
 
 class WrInput extends Component {
   state = {
@@ -213,7 +171,7 @@ class WrInput extends Component {
   handleChange = event => {
     const value = event.target.value;
     console.log(value);
-    if (value.length < 7) {
+    if (value.length < 6) {
       this.setState({
         value
       });

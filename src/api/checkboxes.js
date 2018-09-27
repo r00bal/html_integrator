@@ -7,7 +7,7 @@ export const checkboxes = [
     todo: "ADD",
     error: "favicon error",
     location: "<head>",
-    default: ["HR"],
+    default: ["HR", "LHR"],
     code: s.faviconHR
   },
 
