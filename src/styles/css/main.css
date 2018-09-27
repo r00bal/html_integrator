@@ -1,0 +1,456 @@
+@charset "UTF-8";
+.checkbox label::after, .checkbox label::before, .checkbox input, .field .slider input {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  min-width: 320px;
+  background: #fff;
+  line-height: 1.4285em;
+  color: rgba(0, 0, 0, 0.76);
+}
+
+button, input, optgroup, select, textarea {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+*, input, label, select, button, textarea, :after, :before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+input, textarea, select, button {
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+}
+
+.select:focus, input:focus {
+  outline: 0;
+}
+
+.App {
+  width: 80%;
+  max-width: 37.5em;
+  margin: 5em auto;
+}
+
+label, div {
+  display: block;
+  letter-spacing: 0.0625em;
+}
+
+textarea {
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  width: 100%;
+  min-height: 20em;
+  margin: 0em;
+  -webkit-appearance: none;
+  padding: 0.78571429em 1em;
+  background: #fff;
+  outline: none;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 1em;
+  resize: vertical;
+  -webkit-transition: color 0.1s ease, border-color 0.2s ease;
+  -ms-transition: color 0.1s ease, border-color 0.2s ease;
+  transition: color 0.1s ease, border-color 0.2s ease;
+}
+textarea:focus {
+  color: rgba(0, 0, 0, 0.95);
+  border-color: #85B7D9;
+  -webkit-box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
+  -ms-box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
+  box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
+}
+
+.label_container {
+  position: relative;
+  font-weight: 400;
+  font-style: normal;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  color: rgba(0, 0, 0, 0.76);
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.name {
+  margin: 0em;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 5rem;
+  outline: 0;
+  vertical-align: baseline;
+  background: #e0e1e2;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  padding: 0.67857143em 1em;
+  border-radius: 0.28571429rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 0 solid transparent;
+}
+
+.input, .name, .text, .item, .label_container {
+  font-size: 1em;
+}
+
+.input {
+  margin: 0em;
+  max-width: 100%;
+  -webkit-box-flex: 1;
+  flex: 1 0 auto;
+  outline: 0;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  line-height: 1.2142857em;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 0.67857143em 1em;
+  background: #fff;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 0.28571429rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-color: transparent;
+  -webkit-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease, box-shadow 0.1s ease;
+  -ms-transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease, box-shadow 0.1s ease;
+  transition: border-color 0.1s ease, -webkit-box-shadow 0.1s ease, box-shadow 0.1s ease;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: color 0.1s ease, border-color 0.2s ease;
+  -ms-transition: color 0.1s ease, border-color 0.2s ease;
+  transition: color 0.1s ease, border-color 0.2s ease;
+}
+.input:focus {
+  color: rgba(0, 0, 0, 0.95);
+  border-color: #85B7D9;
+  -webkit-box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
+  -ms-box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
+  box-shadow: 0px 0em 0em 0em rgba(34, 36, 38, 0.35) inset;
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  vertical-align: baseline;
+  background: #e0e1e2;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 1em 0.25em 0 0;
+  padding: 0.78571429em 1.5em 0.78571429em;
+  text-transform: none;
+  text-shadow: none;
+  line-height: 1.2142857em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429rem;
+  text-transform: none;
+  text-shadow: none !important;
+}
+.button:hover {
+  background-color: #cacbcd;
+  color: rgba(0, 0, 0, 0.87);
+}
+.button:focus {
+  background-color: #cacbcd;
+  color: rgba(0, 0, 0, 0.87);
+}
+.button:active {
+  background-color: #babbbc;
+  color: rgba(0, 0, 0, 0.95);
+}
+
+select, option {
+  display: none !important;
+}
+
+.container {
+  margin-bottom: 7em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.dropdown {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  width: 30%;
+  outline: 0;
+  outline: none;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  text-align: left;
+  font-weight: 400;
+  font-size: inherit;
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  line-height: 1.2142857em;
+  padding: 0.67857143em 1em;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: none;
+  transition: all 0.1s;
+}
+.dropdown:hover {
+  border-color: rgba(34, 36, 38, 0.35);
+  z-index: 1;
+}
+.dropdown:focus {
+  color: rgba(0, 0, 0, 0.95);
+}
+
+.drop .input {
+  width: calc(100% - 30% - 5rem);
+}
+
+.select {
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform: scaleY(0);
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  width: calc(100% + 2px);
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-top: none;
+  transition: all 0.1s ease;
+  -webkit-transition: all 0.1s ease;
+  transform-origin: top;
+  will-change: height;
+}
+.select:focus {
+  border: 1px solid rgba(34, 36, 38, 0.35);
+}
+
+.text {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.item {
+  width: 100%;
+  display: block;
+  color: rgba(0, 0, 0, 0.76);
+  line-height: 1.2142857em;
+  padding: 0.67857143em 1em;
+}
+.item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.95);
+}
+
+.selected {
+  background: rgba(0, 0, 0, 0.03);
+  color: rgba(0, 0, 0, 0.95);
+  font-weight: 700;
+}
+
+.active {
+  transform: scaleY(1);
+  border-color: #85B7D9;
+}
+
+.drop-active, .dropdown.drop-active:hover {
+  color: rgba(0, 0, 0, 0.95);
+  border-color: #85B7D9;
+  border-bottom: 1px solid rgba(34, 36, 38, 0.05);
+  z-index: 10;
+}
+
+.select.active:focus {
+  border-top: none;
+}
+
+.fields {
+  font-size: 1rem;
+}
+
+.field {
+  display: block;
+  margin: 0.5em 0;
+  padding: 0;
+  font-size: 1rem;
+}
+.field .slider {
+  min-height: 1.25rem;
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  outline: 0;
+  vertical-align: baseline;
+  font-style: normal;
+  font-size: 1rem;
+}
+.field .slider input {
+  width: 3.5rem;
+  height: 1.25rem;
+  z-index: 100;
+  cursor: pointer;
+  outline: 0;
+  font-size: 100%;
+  line-height: 1.15;
+}
+.field .slider input:checked ~ label {
+  color: rgba(0, 0, 0, 0.95) !important;
+}
+.field .slider input:checked ~ label:before {
+  background-color: #545454 !important;
+}
+.field .slider input:checked ~ label:after {
+  left: 2rem;
+}
+.field .slider label {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: rgba(0, 0, 0, 0.4);
+  cursor: auto;
+  position: relative;
+  display: block;
+  outline: 0;
+  padding-left: 4.5rem;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 14px;
+  top: 0;
+  left: 0;
+  height: 17px;
+  text-align: left;
+}
+.field .slider label::before {
+  display: block;
+  position: absolute;
+  content: "";
+  border: none !important;
+  left: 0;
+  z-index: 1;
+  top: 0.4rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  width: 3.5rem;
+  height: 0.21428571rem;
+  -webkit-transform: none;
+  transform: none;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+  font-size: 1em;
+}
+.field .slider label::after {
+  position: absolute;
+  content: "" !important;
+  opacity: 1;
+  z-index: 2;
+  border: none;
+  background: #fff linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15), 0 0 0 1px rgba(34, 36, 38, 0.15) inset;
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -0.25rem;
+  left: 0;
+  transform: none;
+  border-radius: 500rem;
+  transition: left 0.3s ease;
+  font-size: 1em;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.checkbox {
+  position: relative;
+  display: inline-block;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  outline: 0;
+  vertical-align: baseline;
+  font-style: normal;
+  min-height: 17px;
+  font-size: 1rem;
+  min-width: 17px;
+}
+.checkbox input {
+  cursor: pointer;
+  opacity: 0 !important;
+  outline: 0;
+  z-index: 3;
+  width: 17px;
+  height: 17px;
+}
+.checkbox input.hidden + label {
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  color: rgba(0, 0, 0, 0.76);
+  transition: color 0.1s ease;
+}
+.checkbox input.hidden + label:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+.checkbox label {
+  position: relative;
+  display: block;
+  padding-left: 1.85714em;
+  outline: 0;
+}
+.checkbox label:hover {
+  color: rgba(0, 0, 0, 0.87);
+}
+.checkbox label::before {
+  width: 17px;
+  height: 17px;
+  content: "";
+  background: #fff;
+  border-radius: 0.28571429rem;
+  border: 1px solid #d4d4d5;
+}
+.checkbox label::after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  opacity: 0;
+  color: rgba(0, 0, 0, 0.76);
+  transition: border 0.1s ease, opacity 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease, -webkit-transform 0.1s ease, -webkit-box-shadow 0.1s ease;
+}
+
+input:checked ~ label:after {
+  content: "";
+  opacity: 1;
+  color: rgba(0, 0, 0, 0.95);
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,497 @@
+
+// @import "./fontawesome-free/scss/fontawesome.scss"
+// @import "./fontawesome-free/scss/fa-solid.scss"
+// @import "./fontawesome-free/scss/fa-brands.scss"
+$border_color_grey_light: rgba(34, 36, 38, .15)
+$border_color_grey_dark: rgba(34, 36, 38, .35)
+$border: 1px solid $border_color_grey_light
+$color_light_dark: rgba(0, 0, 0, 0.76)
+$color_medium_dark: rgba(0, 0, 0, 0.87)
+$color_hevy_dark: rgba(0, 0, 0, 0.95)
+$border_radius: 0.28571429rem
+$border_color_blue: #85B7D9
+$area_padding: 0.78571429em 1em
+$font_size_main: 14px
+$font_Lato: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif
+$checkbox-size: 17px
+$font_size_form: .9rem
+$font_size_input: .9rem
+$line_hight: 1.2142857em
+$button_padding: .78571429em 1.5em .78571429em
+$input_padding: .67857143em 1em
+$background_submit: #e0e1e2
+$white_background: #fff
+$background_submit_hover: #cacbcd
+$color_submit: rgba(0, 0, 0, .6)
+$text_area_transition: color 0.1s ease, border-color .2s ease
+$text_area_box_shadow: 0px 0em 0em 0em $border_color_grey_dark inset
+
+%absolute_zero
+  position: absolute
+  top: 0
+  left: 0
+
+
+=transition($property...)
+  -webkit-transition: $property
+  -ms-transition:     $property
+  transition:         $property
+=box-shadow($property)
+  -webkit-box-shadow: $property
+  -ms-box-shadow:     $property
+  box-shadow:         $property
+
+
+// reset
+
+
+html
+  font-size: $font_size_main
+
+body
+  font-family: $font_Lato
+  font-size: $font_size_main
+  margin: 0
+  padding: 0
+  overflow-x: hidden
+  min-width: 320px
+  background: $white_background
+  line-height: 1.4285em
+  color: $color_light_dark
+
+button, input, optgroup, select, textarea
+  font-family: sans-serif
+  font-size: 100%
+  line-height: 1.15
+  margin: 0
+
+*, input, label, select, button, textarea, :after, :before
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+  font-size: $font_size_main
+
+input, textarea, select, button
+  text-rendering: auto
+  color: initial
+  letter-spacing: normal
+  word-spacing: normal
+  text-transform: none
+  text-indent: 0px
+  text-shadow: none
+  display: inline-block
+  text-align: start
+  margin: 0em
+  font: 400 13.3333px Arial
+
+.select:focus, input:focus
+  outline: 0
+
+.App
+  width: 80%
+  max-width: 37.5em
+  margin: 5em auto
+
+label, div
+  display: block
+  letter-spacing: 0.0625em
+
+textarea
+  border: $border
+  border-radius: $border_radius
+  border: $border
+  width: 100%
+  min-height: 20em
+  margin: 0em
+  -webkit-appearance: none
+  padding: $area_padding
+  background: $white_background
+  outline: none
+  color: $color_medium_dark
+  font-size: $font_size_form
+  resize: vertical
+  +transition($text_area_transition)
+  &:focus
+    color: $color_hevy_dark
+    border-color: $border_color_blue
+    +box-shadow($text_area_box_shadow)
+
+.label_container
+  position: relative
+  font-weight: 400
+  font-style: normal
+  display: -webkit-inline-box
+  display: -ms-inline-flexbox
+  display: inline-flex
+  color: $color_light_dark
+  margin-bottom: 1em
+  width: 100%
+
+.name
+  margin: 0em
+  display: inline-block
+  flex: 0 0 auto
+  width: 5rem
+  outline: 0
+  vertical-align: baseline
+  background: $background_submit
+  color: rgba(0, 0, 0, .6)
+  text-align: center
+  //margin: 1em .25em 0 0
+  padding: $input_padding
+  border-radius: $border_radius
+  border-top-right-radius: 0
+  border-bottom-right-radius: 0
+  border: 0 solid transparent
+
+.input, .name, .text, .item, .label_container
+  font-size: $font_size_form
+
+.input
+  margin: 0em
+  max-width: 100%
+  -webkit-box-flex: 1
+  flex: 1 0 auto
+  outline: 0
+  outline: none
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+  text-align: left
+  line-height: $line_hight
+  font-family: $font_Lato
+  padding: $input_padding
+  background: $white_background
+  border: 1px solid $border_color_grey_light
+  color: $color_medium_dark
+  border-radius: $border_radius
+  border-top-left-radius: 0
+  border-bottom-left-radius: 0
+  border-left-color: transparent
+  +transition(border-color 0.1s ease, -webkit-box-shadow 0.1s ease, box-shadow 0.1s ease)
+  -webkit-box-shadow: none
+  box-shadow: none
+  +transition($text_area_transition)
+  &:focus
+    color: $color_hevy_dark
+    border-color: $border_color_blue
+    +box-shadow($text_area_box_shadow)
+
+.button
+  cursor: pointer
+  display: flex
+  min-height: 1em
+  outline: 0
+  vertical-align: baseline
+  background: $background_submit
+  color: rgba(0, 0, 0, .6)
+  margin: 1em .25em 0 0
+  padding: $button_padding
+  text-transform: none
+  text-shadow: none
+  line-height: $line_hight
+  font-style: normal
+  text-align: left
+  text-decoration: none
+  border-radius: $border_radius
+  text-transform: none
+  text-shadow: none !important
+  &:hover
+    background-color: $background_submit_hover
+    color: $color_medium_dark
+  &:focus
+    background-color: $background_submit_hover
+    color: $color_medium_dark
+  &:active
+    background-color: #babbbc
+    color: $color_hevy_dark
+
+
+select, option
+ border: none
+ border-radius: 0 !important
+ display: none !important
+body ::-webkit-scrollbar-thumb
+    cursor: pointer
+    border-radius: 0
+    background: rgba(0,0,0,.25)
+    -webkit-transition: color .2s ease
+    transition: color .2s ease
+
+.container
+  width: 100%
+  margin-bottom: 0
+  display:  flex
+  flex-direction: column
+  justify-content: center
+  align-content: flex-start
+
+
+
+.dropdown
+  cursor: pointer
+  display: inline-block
+  position: relative
+  margin: 0
+  width: 30%
+  outline: 0
+  outline: none
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0)
+  text-align: left
+  font-weight: 400
+  font-size: inherit
+  font-family: $font_Lato
+  line-height: $line_hight
+  //padding: $input_padding
+  border: 1px solid $border_color_grey_light
+  color: $color_medium_dark
+  box-shadow: none
+  transition: all .1s
+  &:hover
+    border-color: rgba(34,36,38,.35)
+    z-index: 1
+  &:focus
+    color: $color_hevy_dark
+
+.drop .input
+  width: calc(100% - 30% - 5rem)
+
+.select
+  overflow-x: hidden
+  overflow-y: auto
+  transform: scaleY(0)
+  position: absolute
+  top: 100%
+  left: -1px
+  width: calc(100% + 2px)
+  border: 1px solid $border_color_grey_light
+  border-top: none
+  transition: all .1s ease
+  -webkit-transition: all .1s ease
+  transform-origin:  top
+  will-change: height
+  &:focus
+    border: 1px solid $border_color_grey_dark
+
+.text
+  overflow: hidden
+  width: 100%
+  height: 100%
+  z-index: 100
+  padding: $input_padding
+  color: $color_light_dark
+  //display: inline-block
+  white-space: nowrap
+
+
+.item
+  width: 100%
+  display: block
+  color: $color_light_dark
+  line-height: $line_hight
+  padding: $input_padding
+  &:hover
+    background: rgba(0,0,0,.05)
+    color: $color_hevy_dark
+
+.selected
+  background: rgba(0,0,0,.03)
+  color: $color_hevy_dark
+  font-weight: 700
+
+.active
+  transform: scaleY(1)
+  background-color: #fff
+  border-color: $border_color_blue
+
+.drop-active, .dropdown.drop-active:hover
+  color: $color_hevy_dark
+  border-color: $border_color_blue
+  border-bottom: 1px solid rgba(34, 36, 38, .05)
+  z-index: 10
+
+.select.active:focus
+  border-top: none
+
+.fields
+  margin: 0 auto
+  font-size: $font_size_input
+.field
+  display: block
+  margin: .5em 0
+  padding: 0
+  // -webkit-box-flex: 0
+  // -ms-flex: 0 1 auto
+  // flex: 0 1 auto
+  font-size: $font_size_input
+  .slider
+    min-height: 1.25rem
+    position: relative
+    //display: inline-block
+    -webkit-backface-visibility: hidden
+    backface-visibility: hidden
+    outline: 0
+    vertical-align: baseline
+    font-style: normal
+    font-size: $font_size_input
+    input
+      width: 3.5rem
+      height: 1.25rem
+      z-index: 100
+      cursor: pointer
+      @extend %absolute_zero
+      outline: 0
+      font-size: 100%
+      line-height: 1.15
+      &:checked~label
+        color: rgba(0,0,0,.95)!important
+      &:checked~label:before
+        background-color: #545454!important
+      &:checked~label:after
+        left: 2rem
+    label
+      cursor: pointer
+      -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+      //line-height: 1rem
+      color: rgba(0,0,0,.4)
+      cursor: auto
+      position: relative
+      display: block
+      outline: 0
+      padding-left: 4.5rem
+      color: rgba(0,0,0,.4)
+      font-size: $font_size_main
+      top: 0
+      left: 0
+      height: $checkbox-size
+      text-align: left
+      &::before
+        display: block
+        position: absolute
+        content: ''
+        border: none!important
+        left: 0
+        z-index: 1
+        top: .4rem
+        background-color: rgba(0,0,0,.05)
+        width: 3.5rem
+        height: .21428571rem
+        -webkit-transform: none
+        transform: none
+        -webkit-transition: background .3s ease
+        transition: background .3s ease
+        font-size: $font_size_form
+      &::after
+        position: absolute
+        content: ''!important
+        opacity: 1
+        z-index: 2
+        border: none
+        background: $white_background linear-gradient(transparent,rgba(0,0,0,.05))
+        box-shadow: 0 1px 2px 0 rgba(34,36,38,.15), 0 0 0 1px rgba(34,36,38,.15) inset
+        width: 1.5rem
+        height: 1.5rem
+        top: -.25rem
+        left: 0
+        transform: none
+        border-radius: 500rem
+        transition: left .3s ease
+        font-size: $font_size_form
+
+.hidden
+  opacity: 0
+
+.Box
+  height: 12rem
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  margin-bottom: 2rem
+
+@media only screen and (max-width: 600px)
+  .Box
+    height: auto
+    display: flex
+    flex-direction: column
+    flex-wrap: wrap
+
+
+
+
+.checkbox
+  flex: 1 1 50%
+  position: relative
+  align-self: auto
+  flex-direction: row
+  justify-content: flex-start
+  align-content: flex-start
+  text-align: left
+  //display: inline-block
+  -webkit-backface-visibility: hidden
+  backface-visibility: hidden
+  outline: 0
+  vertical-align: baseline
+  font-style: normal
+  //min-height: $checkbox-size
+  font-size: $font_size_input
+
+  .box
+    cursor: pointer
+    @extend %absolute_zero
+    opacity: 0!important
+    outline: 0
+    z-index: 3
+    width: $checkbox-size
+    height: $checkbox-size
+  .box.hidden+label
+    cursor: pointer
+    -webkit-user-select: none
+    user-select: none
+    color: $color_light_dark
+    transition: color .1s ease
+    &:hover
+      color: rgba(0,0,0,.8)
+  .addWR
+    display: inline
+    position: absolute
+    top: 0
+    left: 178px
+    #wr
+      display: inline
+      border: none
+      border-bottom: $border
+      width: 5rem
+      &:focus
+        border-bottom: 1px solid $border_color_grey_dark
+
+
+  label
+    position: relative
+    display: block
+    padding-left: 1.85714em
+    outline: 0
+    &:hover
+      color: $color_medium_dark
+    &::before
+      @extend %absolute_zero
+      width: $checkbox-size
+      height: $checkbox-size
+      content: ''
+      background: $white_background
+      border-radius: $border_radius
+      border: 1px solid #d4d4d5
+    &::after
+      font-family: 'Font Awesome 5 Free'
+      font-weight: 900
+      @extend %absolute_zero
+      width: $checkbox-size
+      height: $checkbox-size
+      text-align: center
+      opacity: 0
+      color: $color_light_dark
+      transition: border .1s ease,opacity .1s ease,transform .1s ease,box-shadow .1s ease,-webkit-transform .1s ease,-webkit-box-shadow .1s ease
+
+input:checked~label:after
+  content: '\f00c'
+  opacity: 1
+  color: $color_hevy_dark
