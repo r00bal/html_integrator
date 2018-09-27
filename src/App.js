@@ -30,8 +30,9 @@ class App extends Component {
   };
 
   handleCheckboxChange = event => {
+    console.log('event ' ,event);
     const checkboxState = Object.assign({}, this.state.checkbox);
-    console.log(checkboxState);
+    console.log('checkboxState ',checkboxState);
     checkboxState[event.value] = event;
     this.setState({
       checkbox: checkboxState
@@ -129,7 +130,7 @@ class App extends Component {
           onWrChange={this.handleWrChange}
           defaultState={this.state.radio}
         />
-        
+
         <h2>Tracking Codes</h2>
         <SelectContainer onChange={this.handleSelectChange}>
           <Select trackName={"TID"} />

@@ -85,32 +85,36 @@ export class CheckboxContainer extends Component {
     } else return false;
   };
 
-  // handleSubmit = event => {
-  //   event.preventDefault();
-  //   const checked = !this.state.checkAll;
-  //   this.setState({
-  //     checkAll: checked
-  //   });
-  //   const checkThisBoxes = this.returnProperCheckboxes(this.props.checkboxes);
-  //
-  //   this.props.onChange(this.sendState(checkThisBoxes, checked));
-  //
-  //   // checkThisBoxes.forEach(box =>
-  //   //   this.props.onChange(this.sendState(box, checked))
-  //   // );
-  //   //return this.props.onChange(this.sendState(box, checked))
-  //
-  //   //this.props.onChange(this.sendState(this.props, isChecked));
-  // };
+  handleSubmit = event => {
+    event.preventDefault();
+    const checked = !this.state.checkAll;
+    this.setState({
+      checkAll: checked
+    });
+    const checkThisBoxes = this.returnProperCheckboxes(this.props.checkboxes);
+    console.log(checkThisBoxes);
+    // setInterval(function () {
+    //
+    //    ch(s(checkThisBoxes[i], checked))
+    //    if (i < checkThisBoxes.length -1) {
+    //      i++
+    //    }
+    // }, .000001);
 
-  // sendState = (props, checked) => {
-  //   const name = props.name;
-  //   const value = props.value;
-  //   const id = props.id;
-  //   const isChecked = checked;
-  //   const proto = props;
-  //   return { name, value, isChecked, id, proto };
-  // };
+    //this.props.onChange(this.sendState(checkThisBoxes, checked));
+    // for (let i = 0; i < checkThisBoxes.length -5; i++ ) {
+    //   console.log(checkThisBoxes[i]);
+    //   this.props.onChange(this.sendState(checkThisBoxes[i], checked))
+    // }
+    // checkThisBoxes.forEach(box =>
+    //   this.props.onChange(this.sendState(box, checked))
+    // );
+    //return this.props.onChange(this.sendState(box, checked))
+
+    //this.props.onChange(this.sendState(this.props, isChecked));
+  };
+
+
 
   returnProperCheckboxes = boxes => {
     return boxes.filter(box => {
@@ -163,10 +167,9 @@ export class CheckboxContainer extends Component {
             proto={box}
             />
         ))}
-
     </div>
-    <Button name={"Check All"} onChange={this.handleSubmit} />
-    </div>
+  <Button name={"Check All"} onChange={this.handleSubmit} />
+  </div>
       )
 
 
