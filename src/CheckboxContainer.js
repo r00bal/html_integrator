@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { integrate } from "./Robots/robots.js";
 import { checkboxes } from "./api/checkboxes.js";
+import { Button } from "./Button.js";
 import { regFor, s } from "./api/regExp.js";
 
 import "./styles/css/style.css";
@@ -127,23 +127,51 @@ export class CheckboxContainer extends Component {
     )
   }
 
+  // renderCheckBoxes = boxes => {
+  //   const checkboxes = this.returnProperCheckboxes(boxes);
+  //   return checkboxes.map((box, index) => {
+  //     return (
+  //       <Checkbox
+  //         isChecked={this.isChecked(this.state.checkboxes[box.value])}
+  //         key={index}
+  //         id={index}
+  //         name={box.name}
+  //         value={box.value}
+  //         onChange={this.props.onChange}
+  //         onWrChange={box.value == "addWR" ? this.props.onWrChange : null}
+  //         proto={box}
+  //       />
+  //     );
+  //   });
+  // };
+
   renderCheckBoxes = boxes => {
     const checkboxes = this.returnProperCheckboxes(boxes);
-    return checkboxes.map((box, index) => {
+
       return (
-        <Checkbox
-          isChecked={this.isChecked(this.state.checkboxes[box.value])}
-          key={index}
-          id={index}
-          name={box.name}
-          value={box.value}
-          onChange={this.props.onChange}
-          onWrChange={box.value == "addWR" ? this.props.onWrChange : null}
-          proto={box}
-        />
-      );
-    });
+<div>
+  <div className="container Box">
+        {checkboxes.map((box, index) => (
+          <Checkbox
+            isChecked={this.isChecked(this.state.checkboxes[box.value])}
+            key={index}
+            id={index}
+            name={box.name}
+            value={box.value}
+            onChange={this.props.onChange}
+            onWrChange={box.value == "addWR" ? this.props.onWrChange : null}
+            proto={box}
+            />
+        ))}
+
+    </div>
+    <Button name={"Check All"} onChange={this.handleSubmit} />
+    </div>
+      )
+
+
   };
+
   render() {
     const checkboxes = this.props.checkboxes;
     return (
@@ -152,8 +180,11 @@ export class CheckboxContainer extends Component {
       //   {/* <Button name={"Check All"} onChange={this.handleSubmit} /> */}
       // </div>
       <div className="container">
-        <div className="container Box">  {(!!this.state.defaultState) ? this.renderCheckBoxes(checkboxes) : this.choseYourBaseFirst()}</div>
-        {/* <Button name={"Check All"} onChange={this.handleSubmit} /> */}
+
+        {(!!this.state.defaultState) ? this.renderCheckBoxes(checkboxes) : this.choseYourBaseFirst()}
+
+
+
       </div>
 
     );

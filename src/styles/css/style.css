@@ -170,7 +170,6 @@ textarea:focus {
   cursor: pointer;
   display: flex;
   min-height: 1em;
-  outline: 0;
   vertical-align: baseline;
   background: #e0e1e2;
   color: rgba(0, 0, 0, 0.6);
