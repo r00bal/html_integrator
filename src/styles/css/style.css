@@ -1,4 +1,12 @@
 @charset "UTF-8";
+@keyframes flesh {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 .checkbox label::after, .checkbox label::before, .checkbox .box, .field .slider input {
   position: absolute;
   top: 0;
@@ -407,11 +415,13 @@ body ::-webkit-scrollbar-thumb {
 }
 
 .Box {
-  height: 12rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-bottom: 2rem;
+}
+.Box p {
+  animation: flesh 1.5s ease-out infinite alternate;
 }
 
 @media only screen and (max-width: 600px) {

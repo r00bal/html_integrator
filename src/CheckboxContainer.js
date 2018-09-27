@@ -121,6 +121,12 @@ export class CheckboxContainer extends Component {
     });
   };
 
+  choseYourBaseFirst = () => {
+    return (
+      <p>Choose your base first..</p>
+    )
+  }
+
   renderCheckBoxes = boxes => {
     const checkboxes = this.returnProperCheckboxes(boxes);
     return checkboxes.map((box, index) => {
@@ -141,10 +147,15 @@ export class CheckboxContainer extends Component {
   render() {
     const checkboxes = this.props.checkboxes;
     return (
-      <div>
-        <div className="container Box">{this.renderCheckBoxes(checkboxes)}</div>
+      // <div>
+      //   <div className="container Box">{this.renderCheckBoxes(checkboxes)}</div>
+      //   {/* <Button name={"Check All"} onChange={this.handleSubmit} /> */}
+      // </div>
+      <div className="container">
+        <div className="container Box">  {(!!this.state.defaultState) ? this.renderCheckBoxes(checkboxes) : this.choseYourBaseFirst()}</div>
         {/* <Button name={"Check All"} onChange={this.handleSubmit} /> */}
       </div>
+
     );
   }
 }
