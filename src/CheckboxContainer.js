@@ -93,6 +93,13 @@ export class CheckboxContainer extends Component {
     });
     const checkThisBoxes = this.returnProperCheckboxes(this.props.checkboxes);
     console.log(checkThisBoxes);
+    const boxObject = {}
+    checkThisBoxes.forEach(box => {
+      Object.assign({}, boxObject);
+      boxObject[box.value] = box;
+    })
+
+    console.log(boxObject);
     // setInterval(function () {
     //
     //    ch(s(checkThisBoxes[i], checked))
