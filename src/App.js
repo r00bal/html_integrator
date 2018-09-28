@@ -2,52 +2,78 @@ import React, { Component } from "react";
 import { integrate } from "./Robots/robots.js";
 import { checkboxes } from "./api/checkboxes.js";
 import { regFor, s } from "./api/regExp.js";
-import {CheckboxContainer} from "./CheckboxContainer.js";
-import {SelectContainer, Select} from "./SelectContainer.js";
-import {RadioGroup, RadioOption} from "./RadioGroup.js";
-import {TextArea} from "./TextArea.js";
-import {Button} from "./Button.js";
+import { CheckboxContainer } from "./CheckboxContainer.js";
+import { SelectContainer, Select } from "./SelectContainer.js";
+import { RadioGroup, RadioOption } from "./RadioGroup.js";
+import { TextArea } from "./TextArea.js";
+import { Button } from "./Button.js";
 
 import "./styles/css/style.css";
 
 class App extends Component {
   state = {
     radio: "",
-    checkbox: {},
+    checkbox: [],
     trackingCodes: {}
   };
+
+  componentWillMount() {
+    const checkboxState = checkboxes.map((box, i) =>
+      Object.assign(box, {
+        key: i,
+        isChecked: false
+      })
+    );
+    this.setState({
+      checkbox: checkboxState
+    });
+  }
 
   handleRadioChange = event => {
     const target = event.target;
     const type = target.type;
     if (type === "radio" || target.htmlFor === "base") {
       const base = target.value || target.textContent;
+      const checkbox = this.state.checkbox.map(box => ({
+        ...box,
+        isChecked: false
+      }));
       this.setState({
         radio: base,
-        checkbox: {}
+        checkbox
       });
     }
   };
 
   handleCheckboxChange = event => {
-    console.log('event ' ,event);
-    const checkboxState = Object.assign({}, this.state.checkbox);
-    console.log('checkboxState ',checkboxState);
-    checkboxState[event.value] = event;
+    const checkboxState = this.state.checkbox.map(box => {
+      if (box.value === event.value) {
+        return Object.assign(box, event);
+      }
+      if (Array.isArray(event)) {
+        event.forEach(element => {
+          if (element.value === box.value) {
+            return Object.assign(box, element);
+          }
+        });
+      }
+      return box;
+    });
     this.setState({
       checkbox: checkboxState
     });
   };
 
   handleWrChange = value => {
-    if (this.state.checkbox.addWR) {
-      const checkboxState = Object.assign({}, this.state.checkbox);
-      checkboxState.addWR.wr = value;
-      checkboxState.addWR.proto.code = s.imgUrl + value + "_";
-      this.setState({
-        checkbox: checkboxState
-      });
-    }
+    const wr = s.imgUrl + value + "_";
+    const checkboxState = this.state.checkbox.map(
+      box => (box.value === "addWR" ? { ...box, code: wr } : box)
+    );
+
+    this.setState({
+      checkbox: checkboxState
+    });
+    // }
   };
 
   // handleCheckboxChange = event => {
@@ -97,8 +123,7 @@ class App extends Component {
   };
 
   activeCheckboxes = boxes => {
-    const arrayBoxes = Object.keys(boxes).map(i => boxes[i]);
-    return arrayBoxes.filter(active => active.isChecked).map(box => box.proto);
+    return boxes.filter(active => active.isChecked);
   };
 
   // const peopleArray = Object.keys(peopleObj).map(i => peopleObj[i])
@@ -124,8 +149,7 @@ class App extends Component {
         </RadioGroup>
         <h2>Settings</h2>
         <CheckboxContainer
-          isChecked={this.state.checkbox}
-          checkboxes={checkboxes}
+          checkboxes={this.state.checkbox}
           onChange={this.handleCheckboxChange}
           onWrChange={this.handleWrChange}
           defaultState={this.state.radio}
@@ -148,7 +172,5 @@ class App extends Component {
     );
   }
 }
-
-
 
 export default App;
