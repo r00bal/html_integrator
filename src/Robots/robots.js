@@ -13,18 +13,30 @@ export const integrate = (stringCode, trackingCodes, actions) => {
   );
   // chnage old urls to updated one with actual tracking codes
   const updatedContent = update(catchUrls, addTrackingCodes, htmlCode);
-  console.log(actions);
-  console.log(replaceActionsArray);
+
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
   return finalCode;
 };
 
-const createTrackingArray = state => {
+const createTrackingArray = trackings => {
   const arr = [];
-  for (var key in state) {
-    arr.push(state[key]);
+  if (!!trackings.TID) {
+    arr.push(trackings.TID);
   }
+
+  if (!!trackings.CRM) {
+    arr.push(trackings.CRM);
+  }
+
+  if (!!trackings.REC) {
+    arr.push(trackings.REC);
+  }
+  console.log(arr);
+
+  // for (var key in state) {
+  //   arr.push(state[key]);
+  // }
   return arr;
 };
 
