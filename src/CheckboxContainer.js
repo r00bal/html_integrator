@@ -106,7 +106,6 @@ export class CheckboxContainer extends Component {
   };
 
   returnProperCheckboxes = boxes => {
-    console.log(boxes);
     return boxes.filter(
       box =>
         box.default.includes(this.state.defaultState) || box.default === "ALL"
@@ -119,7 +118,6 @@ export class CheckboxContainer extends Component {
 
   renderCheckBoxes = boxes => {
     const checkboxes = this.returnProperCheckboxes(boxes);
-    console.log(checkboxes);
 
     return (
       <div>
@@ -171,7 +169,7 @@ class WrInput extends Component {
   handleChange = event => {
     const value = event.target.value;
     console.log(value);
-    if (value.length < 6) {
+    if (value.length <= 6) {
       this.setState({
         value
       });
