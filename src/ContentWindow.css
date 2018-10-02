@@ -9,10 +9,3 @@
 .contentWindow .show {
   display: block !important;
 }
-
-
-.contentWindow .button {
-  position: absolute;
-  bottom: -10px;
-  left: 45%;
-}

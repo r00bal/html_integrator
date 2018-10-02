@@ -15,7 +15,8 @@ class App extends Component {
   state = {
     radio: "",
     checkbox: [],
-    trackingCodes: {}
+    trackingCodes: {},
+    updatedContent: ""
   };
 
   componentWillMount() {
@@ -127,6 +128,17 @@ class App extends Component {
     return boxes.filter(active => active.isChecked);
   };
 
+  copyToClipboard = e => {
+    e.preventDefault();
+    //this.refs.newText.getDOMNode().select();
+    const textField = document.createElement("textarea");
+    textField.innerText = this.state.updatedContent;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand("copy");
+    textField.remove();
+  };
+
   // const peopleArray = Object.keys(peopleObj).map(i => peopleObj[i])
   // activeCheckboxes = e => boxes => {
   //   return boxes
@@ -137,43 +149,48 @@ class App extends Component {
   render() {
     return (
       <div>
-      <form className="App">
-        <h1>HTML integrator</h1>
-        <h2>Choose email base</h2>
-        <RadioGroup
-          name="base"
-          value={this.state.radio}
-          onChange={this.handleRadioChange}
-        >
-          <RadioOption value="HR" />
-          <RadioOption value="LHR" />
-          <RadioOption value="HEX" />
-        </RadioGroup>
-        <h2>Settings</h2>
-        <CheckboxContainer
-          checkboxes={this.state.checkbox}
-          onChange={this.handleCheckboxChange}
-          onWrChange={this.handleWrChange}
-          defaultState={this.state.radio}
-        />
+        <form className="App">
+          <h1>HTML integrator</h1>
+          <h2>Choose email base</h2>
+          <RadioGroup
+            name="base"
+            value={this.state.radio}
+            onChange={this.handleRadioChange}
+          >
+            <RadioOption value="HR" />
+            <RadioOption value="LHR" />
+            <RadioOption value="HEX" />
+          </RadioGroup>
+          <h2>Settings</h2>
+          <CheckboxContainer
+            checkboxes={this.state.checkbox}
+            onChange={this.handleCheckboxChange}
+            onWrChange={this.handleWrChange}
+            defaultState={this.state.radio}
+          />
 
-        <h2>Tracking Codes</h2>
-        <SelectContainer onChange={this.handleSelectChange}>
-          <Select trackName={"TID"} />
-          <Select trackName={"CRM"} />
-          <Select trackName={"REC"} />
-        </SelectContainer>
-        <h2>Email Code</h2>
-        <TextArea onChange={this.handleTextAreaChnage} />
-        <Button
-          id={"submit"}
-          name={"Integrate!"}
-          onChange={this.handleSubmit}
-        />
-        <ContentWindow class={(this.state.updatedContent) ? 'show' : ''}
-          content={this.state.updatedContent}/>
-      </form>
-
+          <h2>Tracking Codes</h2>
+          <SelectContainer onChange={this.handleSelectChange}>
+            <Select trackName={"TID"} />
+            <Select trackName={"CRM"} />
+            <Select trackName={"REC"} />
+          </SelectContainer>
+          <h2>Email Code</h2>
+          <TextArea
+            copy={"Past your code here:"}
+            onChange={this.handleTextAreaChnage}
+          />
+          <Button
+            id={"submit"}
+            name={"Integrate!"}
+            onChange={this.handleSubmit}
+          />
+          <ContentWindow
+            class={this.state.updatedContent ? "show" : ""}
+            content={this.state.updatedContent}
+            copy={this.copyToClipboard}
+          />
+        </form>
       </div>
     );
   }
