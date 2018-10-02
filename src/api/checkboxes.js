@@ -7,7 +7,7 @@ export const checkboxes = [
     todo: "ADD",
     error: "favicon error",
     location: "<head>",
-    default: "HR",
+    default: ["HR", "LHR"],
     code: s.faviconHR
   },
 
@@ -26,7 +26,7 @@ export const checkboxes = [
     todo: "REPLACE",
     error: "removeTableLayoutFixed error",
     location: regFor.tableLayout,
-    default: "no",
+    default: "ALL",
     code: s.empty
   },
   {
@@ -55,7 +55,7 @@ export const checkboxes = [
     location: "<head>",
     code:
       '<link rel="Shortcut Icon" type="image/x-icon" href="https://s3-eu-west-1.amazonaws.com/lhr-images/HEX_favico.png" />',
-    default: "HEX"
+    default: ["HEX"]
   },
   {
     name: "Add metaDetection",
@@ -75,7 +75,7 @@ export const checkboxes = [
     location: regFor.backgroundRewards2013,
     code:
       '<!-- Outlook 2016,Win10, 2013,2010,2007 Background START -------------------------------- -->\n<!--[if gte mso 9]>\n<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">\n<v:fill type="tile" src="https://s3-eu-west-1.amazonaws.com/havasheliaww/rewards_bg.jpg" color="#e4e4e4"/>\n</v:background>\n<![endif]-->\n<!-- Outlook 2016,Win10, 2013,2010,2007 Background END --------------------------------  -->',
-    default: "HR"
+    default: ["HR"]
   },
   {
     name: "Add backgroundRewards2016",
@@ -84,7 +84,7 @@ export const checkboxes = [
     error: "backgroundRewards2016 error",
     location: "regFor.backgroundRewards2016",
     code: " ",
-    default: "HR"
+    default: ["HR"]
   },
   {
     name: "Add HEX Random Pixel",
@@ -94,7 +94,7 @@ export const checkboxes = [
     location: " </body>",
     code:
       '<%@ include view="FooterMay17" %> \n  <% var randomNumber = Math.floor((Math.random() * 1000000) + 1); %> \n <img src="https://ad.doubleclick.net/ddm/activity/src=3793307;type=hexemail;cat=hex-e0;u13=WR1680;u14=ALLB;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=<%= targetData.individual_id %>;num=<%= randomNumber %>?" width="1" height="1" alt="iCr"/> \n  </body>',
-    default: "HEX"
+    default: ["HEX"]
   },
   {
     name: "Add HEX unsub",
@@ -103,7 +103,7 @@ export const checkboxes = [
     error: "unsub HEX error",
     location: "<%@ include view='VIEW30' %>",
     code: "<%@ include view='VIEW111' %>",
-    default: "HEX"
+    default: ["HEX"]
   },
   {
     name: "Add HR unsub",
@@ -114,7 +114,7 @@ export const checkboxes = [
       '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"><span style="color:#ffffff">Unsubscribe</span></a> |',
     code:
       '<a href="https://rewards.heathrow.com/web/lhr/unsubscribe?cardNumber=<%= targetData.customer_no %>&hash=<%= targetData.staff_type %>&CMP=CRM1234567" _label="unsubscribe" target="_blank" style="color:#FFF"><span style="color:#ffffff; text-decoration:underline">Unsubscribe</span></a> |',
-    default: "HR"
+    default: ["HR"]
   },
   {
     name: "Add LHR unsub",
@@ -124,7 +124,7 @@ export const checkboxes = [
     location:
       '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"> <span style="color:#ffffff">Unsubscribe</span></a> |',
     code: "<%@ include view='VIEW21' %>",
-    default: "LHR"
+    default: ["LHR"]
   },
   {
     name: "Move Footer to main Wrapper",

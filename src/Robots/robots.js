@@ -13,18 +13,30 @@ export const integrate = (stringCode, trackingCodes, actions) => {
   );
   // chnage old urls to updated one with actual tracking codes
   const updatedContent = update(catchUrls, addTrackingCodes, htmlCode);
-  console.log(actions);
-  console.log(replaceActionsArray);
+
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
   return finalCode;
 };
 
-const createTrackingArray = state => {
+const createTrackingArray = trackings => {
   const arr = [];
-  for (var key in state) {
-    arr.push(state[key]);
+  if (!!trackings.TID) {
+    arr.push(trackings.TID);
   }
+
+  if (!!trackings.CRM) {
+    arr.push(trackings.CRM);
+  }
+
+  if (!!trackings.REC) {
+    arr.push(trackings.REC);
+  }
+  console.log(arr);
+
+  // for (var key in state) {
+  //   arr.push(state[key]);
+  // }
   return arr;
 };
 
@@ -301,22 +313,35 @@ const replaceActionsArray = [
   unsub(s.unsub)
 ];
 
-const findAndReplaceWith = (find, replaceWith, str) =>
-  str.replace(find, replaceWith);
-
-const findAndMove = (moveTo, findRegExp, str) => {
-  console.log(findRegExp);
-  const find = str.match(findRegExp)[0];
-  const length = moveTo.length;
-  const indexFind = str.indexOf(find);
-  const newStr = str.slice(0, indexFind) + str.slice(indexFind + find.length);
-  const indexMoveTo = newStr.indexOf(moveTo);
-  return `${newStr.slice(0, indexMoveTo + length)}\n\n${find}${newStr.slice(
-    indexMoveTo + length
-  )}`;
+const findAndReplaceWith = (find, replaceWith, str, error) => {
+  console.log("findAndReplaceWith ", str.match(find));
+  if (!str.match(find)) {
+    console.log(error);
+    return str;
+  }
+  return str.replace(find, replaceWith);
 };
 
-const addToPlace = (find, moveTo, str) => {
+const findAndMove = (moveTo, findRegExp, str, error) => {
+  console.log(findRegExp);
+  console.log(str.match(findRegExp));
+  if (!str.match(findRegExp)) {
+    console.log(error);
+    return str;
+  } else {
+    const find = str.match(findRegExp)[0];
+
+    const length = moveTo.length;
+    const indexFind = str.indexOf(find);
+    const newStr = str.slice(0, indexFind) + str.slice(indexFind + find.length);
+    const indexMoveTo = newStr.indexOf(moveTo);
+    return `${newStr.slice(0, indexMoveTo + length)}\n\n${find}${newStr.slice(
+      indexMoveTo + length
+    )}`;
+  }
+};
+
+const addToPlace = (find, moveTo, str, error) => {
   const lengthfind = find.length;
   const lengthmoveTo = moveTo.length;
   const indexFind = str.indexOf(find);
@@ -343,13 +368,18 @@ const addCode = actions => content => {
 const reducer = (action, state) => {
   switch (action.todo) {
     case "MOVE":
-      return findAndMove(action.location, action.code, state);
+      return findAndMove(action.location, action.code, state, action.error);
 
     case "ADD":
-      return addToPlace(action.location, action.code, state);
+      return addToPlace(action.location, action.code, state, action.error);
 
     case "REPLACE":
-      return findAndReplaceWith(action.location, action.code, state);
+      return findAndReplaceWith(
+        action.location,
+        action.code,
+        state,
+        action.error
+      );
     default:
       return state;
   }
