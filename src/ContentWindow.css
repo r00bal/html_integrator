@@ -1,0 +1,18 @@
+.contentWindow {
+  height: auto;
+  display: block;
+  background: #fff;
+  z-index: 100;
+  position: relative;
+}
+
+.contentWindow .show {
+  display: block !important;
+}
+
+
+.contentWindow .button {
+  position: absolute;
+  bottom: -10px;
+  left: 45%;
+}

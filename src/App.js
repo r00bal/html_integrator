@@ -7,6 +7,7 @@ import { SelectContainer, Select } from "./SelectContainer.js";
 import { RadioGroup, RadioOption } from "./RadioGroup.js";
 import { TextArea } from "./TextArea.js";
 import { Button } from "./Button.js";
+import { ContentWindow } from "./ContentWindow.js";
 
 import "./styles/css/style.css";
 
@@ -135,6 +136,7 @@ class App extends Component {
 
   render() {
     return (
+      <div>
       <form className="App">
         <h1>HTML integrator</h1>
         <h2>Choose email base</h2>
@@ -168,7 +170,11 @@ class App extends Component {
           name={"Integrate!"}
           onChange={this.handleSubmit}
         />
+        <ContentWindow class={(this.state.updatedContent) ? 'show' : ''}
+          content={this.state.updatedContent}/>
       </form>
+
+      </div>
     );
   }
 }
