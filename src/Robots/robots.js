@@ -1,3 +1,5 @@
+import pandoraBox from "./error";
+
 // https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
 export const integrate = (stringCode, trackingCodes, actions) => {
   console.log("fire");
@@ -16,6 +18,7 @@ export const integrate = (stringCode, trackingCodes, actions) => {
 
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
+  console.log(pandoraBox.get());
   return finalCode;
 };
 
@@ -316,6 +319,7 @@ const replaceActionsArray = [
 const findAndReplaceWith = (find, replaceWith, str, error) => {
   console.log("findAndReplaceWith ", str.match(find));
   if (!str.match(find)) {
+    pandoraBox.add(error)
     console.log(error);
     return str;
   }
@@ -326,6 +330,7 @@ const findAndMove = (moveTo, findRegExp, str, error) => {
   console.log(findRegExp);
   console.log(str.match(findRegExp));
   if (!str.match(findRegExp)) {
+    pandoraBox.add(error)
     console.log(error);
     return str;
   } else {
@@ -345,6 +350,7 @@ const addToPlace = (find, moveTo, str, error) => {
   const lengthfind = find.length;
   const lengthmoveTo = moveTo.length;
   const indexFind = str.indexOf(find);
+  console.log('indexFind ',indexFind, error);
   const indexMoveTo = str.indexOf(moveTo);
   console.log(find);
   console.log(moveTo);
