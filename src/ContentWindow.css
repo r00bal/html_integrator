@@ -1,11 +1,11 @@
 .contentWindow {
   height: auto;
-  display: block;
+  display: none;
   background: #fff;
   z-index: 100;
   position: relative;
 }
 
-.contentWindow .show {
+.show {
   display: block !important;
 }
