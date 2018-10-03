@@ -82,7 +82,7 @@ export const checkboxes = [
     value: "backgroundRewards2016",
     todo: "REPLACE",
     error: "backgroundRewards2016 error",
-    location: "regFor.backgroundRewards2016",
+    location: regFor.backgroundRewards2016,
     code: " ",
     default: ["HR"]
   },

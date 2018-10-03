@@ -113,14 +113,12 @@ class App extends Component {
       updatedContent
     });
 
-    console.log(updatedContent);
   };
 
   integrate = string => {
     const htmlCode = this.state.textarea;
     const trackingCodes = this.state.trackingCodes;
     const checkboxActions = this.activeCheckboxes(this.state.checkbox);
-    console.log(checkboxActions);
     return integrate(htmlCode, trackingCodes, checkboxActions);
   };
 

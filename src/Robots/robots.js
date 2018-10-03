@@ -2,7 +2,9 @@ import pandoraBox from "./error";
 
 // https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
 export const integrate = (stringCode, trackingCodes, actions) => {
+  pandoraBox.reset()
   console.log("fire");
+  console.log(actions)
   const htmlCode = stringCode;
   const regex = regFor.url;
   // catch  all urls into array
@@ -18,6 +20,7 @@ export const integrate = (stringCode, trackingCodes, actions) => {
 
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
+
   console.log(pandoraBox.get());
   return finalCode;
 };
@@ -35,8 +38,6 @@ const createTrackingArray = trackings => {
   if (!!trackings.REC) {
     arr.push(trackings.REC);
   }
-  console.log(arr);
-
   // for (var key in state) {
   //   arr.push(state[key]);
   // }
@@ -317,12 +318,13 @@ const replaceActionsArray = [
 ];
 
 const findAndReplaceWith = (find, replaceWith, str, error) => {
-  console.log("findAndReplaceWith ", str.match(find));
-  if (!str.match(find)) {
-    pandoraBox.add(error)
-    console.log(error);
-    return str;
-  }
+  console.log("findAndReplaceWith ", find, replaceWith);
+  // if (!str.match(find)) {
+  //   console.log(str.match(find));
+  //   pandoraBox.add(error)
+  //   console.log(error);
+  //   return str;
+  // }
   return str.replace(find, replaceWith);
 };
 
@@ -350,10 +352,7 @@ const addToPlace = (find, moveTo, str, error) => {
   const lengthfind = find.length;
   const lengthmoveTo = moveTo.length;
   const indexFind = str.indexOf(find);
-  console.log('indexFind ',indexFind, error);
   const indexMoveTo = str.indexOf(moveTo);
-  console.log(find);
-  console.log(moveTo);
   return (
     str.slice(0, indexFind + lengthfind) +
     moveTo +
