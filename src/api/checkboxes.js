@@ -110,8 +110,7 @@ export const checkboxes = [
     value: "unsubHR",
     todo: "REPLACE",
     error: "unsub HR error",
-    location:
-      '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"><span style="color:#ffffff">Unsubscribe</span></a> |',
+    location: regFor.unsub,
     code:
       '<a href="https://rewards.heathrow.com/web/lhr/unsubscribe?cardNumber=<%= targetData.customer_no %>&hash=<%= targetData.staff_type %>&CMP=CRM1234567" _label="unsubscribe" target="_blank" style="color:#FFF"><span style="color:#ffffff; text-decoration:underline">Unsubscribe</span></a> |',
     default: ["HR"]
@@ -121,8 +120,7 @@ export const checkboxes = [
     value: "unsubLHR",
     todo: "REPLACE",
     error: "unsub LHR error",
-    location:
-      '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"> <span style="color:#ffffff">Unsubscribe</span></a> |',
+    location: regFor.unsub,
     code: "<%@ include view='VIEW21' %>",
     default: ["LHR"]
   },
