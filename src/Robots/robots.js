@@ -2,9 +2,9 @@ import pandoraBox from "./error";
 
 // https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
 export const integrate = (stringCode, trackingCodes, actions) => {
-  pandoraBox.reset()
+  //pandoraBox.reset()
   console.log("fire");
-  console.log(actions)
+  console.log(actions);
   const htmlCode = stringCode;
   const regex = regFor.url;
   // catch  all urls into array
@@ -21,7 +21,7 @@ export const integrate = (stringCode, trackingCodes, actions) => {
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
 
-  console.log(pandoraBox.get());
+  //console.log(pandoraBox.get());
   return finalCode;
 };
 
@@ -318,7 +318,6 @@ const replaceActionsArray = [
 ];
 
 const findAndReplaceWith = (find, replaceWith, str, error) => {
-  console.log("findAndReplaceWith ", find, replaceWith);
   // if (!str.match(find)) {
   //   console.log(str.match(find));
   //   pandoraBox.add(error)
@@ -329,15 +328,11 @@ const findAndReplaceWith = (find, replaceWith, str, error) => {
 };
 
 const findAndMove = (moveTo, findRegExp, str, error) => {
-  console.log(findRegExp);
-  console.log(str.match(findRegExp));
   if (!str.match(findRegExp)) {
-    pandoraBox.add(error)
     console.log(error);
     return str;
   } else {
     const find = str.match(findRegExp)[0];
-
     const length = moveTo.length;
     const indexFind = str.indexOf(find);
     const newStr = str.slice(0, indexFind) + str.slice(indexFind + find.length);
