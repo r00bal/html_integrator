@@ -47,11 +47,10 @@ export class Checkbox extends Component {
     }
   };
   render() {
-
     return (
-      <div className="ui checkbox piece">
+      <div className={`ui checkbox piece ${this.props.completed}`}>
         <input
-          className={this.props.completed}
+          className="box"
           id={this.props.id}
           type="checkbox"
           checked={this.state.isChecked}
@@ -119,14 +118,15 @@ export class CheckboxContainer extends Component {
 
   completedOrNot = (arr, val) => {
     console.log(arr, val);
-    let className = 'box'
+    let className = "";
     if (arr) {
-        console.log(true);
-        console.log(!!arr.filter(e => e === val));
-       (!!arr.filter(e => e === val)) ? className += ' completed' : className += ' failed'
+      console.log(arr.filter(e => e === val));
+      arr.filter(e => e === val).length > 0
+        ? (className += "completed")
+        : (className += "failed");
     }
     return className;
-  }
+  };
 
   renderCheckBoxes = boxes => {
     const checkboxes = this.returnProperCheckboxes(boxes);
