@@ -91,9 +91,9 @@ export const checkboxes = [
     value: "AddHEXRandomPixel",
     todo: "REPLACE",
     error: "error AddHEXRandomPixel",
-    location: " </body>",
+    location: "</body>",
     code:
-      '<%@ include view="FooterMay17" %> \n  <% var randomNumber = Math.floor((Math.random() * 1000000) + 1); %> \n <img src="https://ad.doubleclick.net/ddm/activity/src=3793307;type=hexemail;cat=hex-e0;u13=WR1680;u14=ALLB;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=<%= targetData.individual_id %>;num=<%= randomNumber %>?" width="1" height="1" alt="iCr"/> \n  </body>',
+      '<% var randomNumber = Math.floor((Math.random() * 1000000) + 1); %> \n <img src="https://ad.doubleclick.net/ddm/activity/src=3793307;type=hexemail;cat=hex-e0;u13=WR1680;u14=ALLB;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=<%= targetData.individual_id %>;num=<%= randomNumber %>?" width="1" height="1" alt="iCr"/> \n</body>',
     default: ["HEX"]
   },
   {

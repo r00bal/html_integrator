@@ -19,7 +19,7 @@ export const regFor = {
 export const s = {
   social: "<!-- SOCIAL ICONS END -->",
   imgUrl: '"https://s3-eu-west-1.amazonaws.com/lhr-images/',
-  empty: "",
+  empty: " ",
   unsub:
     '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"><span style="color:#ffffff">Unsubscribe</span></a> |',
   faviconHR:
