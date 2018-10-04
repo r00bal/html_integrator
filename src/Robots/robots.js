@@ -21,12 +21,12 @@ export const integrate = (stringCode, trackingCodes, actions) => {
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
   const completedTask = filterTask(finalCode, actions)
-  console.log([...completedTask]);
-  return finalCode;
+//  console.log([...completedTask]);
+  return {finalCode, completedTask};
 };
 
 const filterTask = (content, trackingCodes) => {
-  return trackingCodes.filter(action => actionCheckerReducer(content, action))
+  return trackingCodes.filter(action => actionCheckerReducer(content, action)).map(action => action.value)
 }
 
 const includeStringOrRegexp = (string, action) => {

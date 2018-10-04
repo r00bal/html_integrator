@@ -109,8 +109,10 @@ class App extends Component {
 
     console.log("integrate!");
     const updatedContent = this.integrate(this.state.textarea);
+    console.log(updatedContent);
     this.setState({
-      updatedContent
+      updatedContent: updatedContent.finalCode,
+      completedTask: updatedContent.completedTask
     });
 
   };
@@ -161,6 +163,7 @@ class App extends Component {
           </RadioGroup>
           <h2>Settings</h2>
           <CheckboxContainer
+            completed={this.state.completedTask}
             checkboxes={this.state.checkbox}
             onChange={this.handleCheckboxChange}
             onWrChange={this.handleWrChange}
