@@ -20,51 +20,61 @@ export const integrate = (stringCode, trackingCodes, actions) => {
 
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
-  const completedTask = filterTask(finalCode, actions)
-//  console.log([...completedTask]);
-  return {finalCode, completedTask};
+  const completedTask = filterTask(finalCode, actions);
+  //  console.log([...completedTask]);
+  return { finalCode, completedTask };
 };
 
 const filterTask = (content, trackingCodes) => {
-  return trackingCodes.filter(action => actionCheckerReducer(content, action)).map(action => action.value)
-}
+  return trackingCodes
+    .filter(action => actionCheckerReducer(content, action))
+    .map(action => action.value);
+};
 
 const includeStringOrRegexp = (string, action) => {
-  console.log(action)
-  if (action instanceof RegExp ) {
-    console.log((!!string.match(action)));
-    return (!!string.match(action))
+  console.log(action);
+  if (action instanceof RegExp) {
+    console.log(!!string.match(action));
+    return !!string.match(action);
   } else {
     console.log(string.includes(action));
-    return string.includes(action)
+    return string.includes(action);
   }
-}
+};
 
 const actionCheckerReducer = (string, action) => {
-  console.log(action);
-  switch(action.todo) {
-    case 'REPLACE':
-      return !includeStringOrRegexp(string, action.location)  && includeStringOrRegexp(string, action.code);
-    case 'ADD':
-      return includeStringOrRegexp(string, action.code);
-    case 'MOVE':
-      return checkIfActionMoveIsCompleted(string, action);
+  switch (action.todo) {
+    case "REPLACE":
+      if (action.code.length < 1) {
+        return !includeStringOrRegexp(
+          string,
+          action.location && includeStringOrRegexp(string, action.code)
+        );
+      } else {
+        return includeStringOrRegexp(string, action.code);
+      }
 
+    case "ADD":
+      return includeStringOrRegexp(string, action.code);
+    case "MOVE":
+      return checkIfActionMoveIsCompleted(string, action);
   }
-}
+};
 
 const checkIfActionMoveIsCompleted = (string, action) => {
   if (!string.match(action.code)) {
-    return false
+    return false;
   } else {
-      const actionCode = string.match(action.code)[0];
-      const findActionSectionStart = string.indexOf(actionCode.length) + action.location.length;
-      const findActionSectionEnd = findActionSectionStart + (2 * actionCode.length)
-      const checkSection = string.slice(findActionSectionStart, findActionSectionEnd)
-      return checkSection.includes(actionCode)
+    const actionCode = string.match(action.code)[0];
+    const findActionSectionStart = string.indexOf(actionCode);
+    const findActionSectionEnd = findActionSectionStart + 2 * actionCode.length;
+    const checkSection = string.slice(
+      findActionSectionStart,
+      findActionSectionEnd
+    );
+    return checkSection.includes(actionCode);
   }
-
-}
+};
 
 // const find = str.match(findRegExp)[0];
 // const length = moveTo.length;
@@ -366,7 +376,6 @@ const replaceActionsArray = [
 ];
 
 const findAndReplaceWith = (find, replaceWith, str, error) => {
-
   return str.replace(find, replaceWith);
 };
 
