@@ -503,3 +503,15 @@ input:checked~label:after
   content: '\f00c'
   opacity: 1
   color: $color_hevy_dark
+
+
+.completed
+  label::after
+    color: #59f759!important
+
+.failed
+  label::after
+    color: red!important
+  input:checked~label:after
+    content: '\2715'!important
+    font-weight: bold!important

@@ -1,0 +1,11 @@
+.contentWindow {
+  height: auto;
+  display: none;
+  background: #fff;
+  z-index: 100;
+  position: relative;
+}
+
+.show {
+  display: block !important;
+}

@@ -82,7 +82,7 @@ export const checkboxes = [
     value: "backgroundRewards2016",
     todo: "REPLACE",
     error: "backgroundRewards2016 error",
-    location: "regFor.backgroundRewards2016",
+    location: regFor.backgroundRewards2016,
     code: " ",
     default: ["HR"]
   },
@@ -91,9 +91,9 @@ export const checkboxes = [
     value: "AddHEXRandomPixel",
     todo: "REPLACE",
     error: "error AddHEXRandomPixel",
-    location: " </body>",
+    location: "</body>",
     code:
-      '<%@ include view="FooterMay17" %> \n  <% var randomNumber = Math.floor((Math.random() * 1000000) + 1); %> \n <img src="https://ad.doubleclick.net/ddm/activity/src=3793307;type=hexemail;cat=hex-e0;u13=WR1680;u14=ALLB;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=<%= targetData.individual_id %>;num=<%= randomNumber %>?" width="1" height="1" alt="iCr"/> \n  </body>',
+      '<% var randomNumber = Math.floor((Math.random() * 1000000) + 1); %> \n <img src="https://ad.doubleclick.net/ddm/activity/src=3793307;type=hexemail;cat=hex-e0;u13=WR1680;u14=ALLB;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=<%= targetData.individual_id %>;num=<%= randomNumber %>?" width="1" height="1" alt="iCr"/> \n</body>',
     default: ["HEX"]
   },
   {
@@ -110,8 +110,7 @@ export const checkboxes = [
     value: "unsubHR",
     todo: "REPLACE",
     error: "unsub HR error",
-    location:
-      '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"><span style="color:#ffffff">Unsubscribe</span></a> |',
+    location: regFor.unsub,
     code:
       '<a href="https://rewards.heathrow.com/web/lhr/unsubscribe?cardNumber=<%= targetData.customer_no %>&hash=<%= targetData.staff_type %>&CMP=CRM1234567" _label="unsubscribe" target="_blank" style="color:#FFF"><span style="color:#ffffff; text-decoration:underline">Unsubscribe</span></a> |',
     default: ["HR"]
@@ -121,8 +120,7 @@ export const checkboxes = [
     value: "unsubLHR",
     todo: "REPLACE",
     error: "unsub LHR error",
-    location:
-      '<a href="#" _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"> <span style="color:#ffffff">Unsubscribe</span></a> |',
+    location: regFor.unsub,
     code: "<%@ include view='VIEW21' %>",
     default: ["LHR"]
   },

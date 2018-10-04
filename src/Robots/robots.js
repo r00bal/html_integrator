@@ -1,6 +1,10 @@
+import pandoraBox from "./error";
+
 // https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
 export const integrate = (stringCode, trackingCodes, actions) => {
+  //pandoraBox.reset()
   console.log("fire");
+  console.log(actions);
   const htmlCode = stringCode;
   const regex = regFor.url;
   // catch  all urls into array
@@ -16,8 +20,60 @@ export const integrate = (stringCode, trackingCodes, actions) => {
 
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
-  return finalCode;
+  const completedTask = filterTask(finalCode, actions)
+//  console.log([...completedTask]);
+  return {finalCode, completedTask};
 };
+
+const filterTask = (content, trackingCodes) => {
+  return trackingCodes.filter(action => actionCheckerReducer(content, action)).map(action => action.value)
+}
+
+const includeStringOrRegexp = (string, action) => {
+  console.log(action)
+  if (action instanceof RegExp ) {
+    console.log((!!string.match(action)));
+    return (!!string.match(action))
+  } else {
+    console.log(string.includes(action));
+    return string.includes(action)
+  }
+}
+
+const actionCheckerReducer = (string, action) => {
+  console.log(action);
+  switch(action.todo) {
+    case 'REPLACE':
+      return !includeStringOrRegexp(string, action.location)  && includeStringOrRegexp(string, action.code);
+    case 'ADD':
+      return includeStringOrRegexp(string, action.code);
+    case 'MOVE':
+      return checkIfActionMoveIsCompleted(string, action);
+
+  }
+}
+
+const checkIfActionMoveIsCompleted = (string, action) => {
+  if (!string.match(action.code)) {
+    return false
+  } else {
+      const actionCode = string.match(action.code)[0];
+      const findActionSectionStart = string.indexOf(actionCode.length) + action.location.length;
+      const findActionSectionEnd = findActionSectionStart + (2 * actionCode.length)
+      const checkSection = string.slice(findActionSectionStart, findActionSectionEnd)
+      return checkSection.includes(actionCode)
+  }
+
+}
+
+// const find = str.match(findRegExp)[0];
+// const length = moveTo.length;
+// const indexFind = str.indexOf(find);
+// const newStr = str.slice(0, indexFind) + str.slice(indexFind + find.length);
+// const indexMoveTo = newStr.indexOf(moveTo);
+// `${newStr.slice(0, indexMoveTo + length)}\n\n${find}${newStr.slice(
+//   indexMoveTo + length
+// )}`;
 
 const createTrackingArray = trackings => {
   const arr = [];
@@ -32,8 +88,6 @@ const createTrackingArray = trackings => {
   if (!!trackings.REC) {
     arr.push(trackings.REC);
   }
-  console.log(arr);
-
   // for (var key in state) {
   //   arr.push(state[key]);
   // }
@@ -46,7 +100,6 @@ export const update = (find, replace, str, endIndex = 0) => {
   for (let i = 0; i < find.length; i++) {
     const strIndex = str.indexOf(find[i], endIndex);
     endIndex = strIndex + find[i].length;
-    // console.log(replace[i])
     str = str.slice(0, strIndex) + replace[i] + str.slice(endIndex);
   }
   return str;
@@ -120,7 +173,6 @@ const plus = (url, trackings) => {
 export const createEndPoint = args => url => {
   const trackings = args;
   return trackings.reduce((prev, cur) => {
-    // console.log('cur ',cur)
     cur = trackingsController(prev, cur);
     return moveHashToTheEnd(prev + plus(prev, cur) + cur);
   }, url);
@@ -314,23 +366,16 @@ const replaceActionsArray = [
 ];
 
 const findAndReplaceWith = (find, replaceWith, str, error) => {
-  console.log("findAndReplaceWith ", str.match(find));
-  if (!str.match(find)) {
-    console.log(error);
-    return str;
-  }
+
   return str.replace(find, replaceWith);
 };
 
 const findAndMove = (moveTo, findRegExp, str, error) => {
-  console.log(findRegExp);
-  console.log(str.match(findRegExp));
   if (!str.match(findRegExp)) {
     console.log(error);
     return str;
   } else {
     const find = str.match(findRegExp)[0];
-
     const length = moveTo.length;
     const indexFind = str.indexOf(find);
     const newStr = str.slice(0, indexFind) + str.slice(indexFind + find.length);
@@ -346,8 +391,6 @@ const addToPlace = (find, moveTo, str, error) => {
   const lengthmoveTo = moveTo.length;
   const indexFind = str.indexOf(find);
   const indexMoveTo = str.indexOf(moveTo);
-  console.log(find);
-  console.log(moveTo);
   return (
     str.slice(0, indexFind + lengthfind) +
     moveTo +
