@@ -112,17 +112,29 @@ class App extends Component {
     console.log("integrate!");
     const updatedContent = this.integrate(this.state.textarea);
     // use handling error functions
-    // if htmlValidation than update errorMessage
-    if (!!updatedContent) {
+    // if htmlValidation than update errorMessage shows
+    if (updatedContent.error) {
       this.setState({
-        updatedContent: updatedContent.finalCode,
-        completedTask: updatedContent.completedTask
+        errorMessage: updatedContent.error
       });
-    } else {
-      this.setState({
-        errorMessage: `Don't forget to past your code first`
-      });
+      return;
     }
+    this.setState({
+      updatedContent: updatedContent.finalCode,
+      completedTask: updatedContent.completedTask,
+      errorMessage: updatedContent.errorMessage
+    });
+
+    // if (!!updatedContent) {
+    //   this.setState({
+    //     updatedContent: updatedContent.finalCode,
+    //     completedTask: updatedContent.completedTask
+    //   });
+    // } else {
+    //   this.setState({
+    //     errorMessage: updatedContent.errorMessage
+    //   });
+    // }
   };
 
   integrate = string => {
@@ -192,6 +204,7 @@ class App extends Component {
                 : "Past your code here:"
             }
             onChange={this.handleTextAreaChnage}
+            error={this.state.errorMessage ? true : false}
           />
           <Button
             id={"submit"}

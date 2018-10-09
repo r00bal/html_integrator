@@ -1,36 +1,41 @@
 import pandoraBox from "./error";
-
+import { regFor, s } from "../api/regExp.js";
 // https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
 export const integrate = (stringCode, trackingCodes, actions) => {
-  if (!stringCode) return;
+  if (htmlValidation(stringCode)) {
+    return { error: htmlValidation(stringCode) };
+  } else {
+    const htmlCode = stringCode;
+    const regex = regFor.url;
+    // catch  all urls into array
+    const catchUrls = htmlCode.match(regex);
+    // prepare array with tracking codes obejcts
+    const trackingsArray = createTrackingArray(trackingCodes);
+    // clean urls form tracking codes remains and add actual tracking codes
+    const addTrackingCodes = catchUrls.map(url =>
+      modifyUrl(url)(createEndPoint(trackingsArray))
+    );
+    // chnage old urls to updated one with actual tracking codes
+    const updatedContent = update(catchUrls, addTrackingCodes, htmlCode);
 
-  const htmlCode = stringCode;
-  const regex = regFor.url;
-  // catch  all urls into array
-  const catchUrls = htmlCode.match(regex);
-  // prepare array with tracking codes obejcts
-  const trackingsArray = createTrackingArray(trackingCodes);
-  // clean urls form tracking codes remains and add actual tracking codes
-  const addTrackingCodes = catchUrls.map(url =>
-    modifyUrl(url)(createEndPoint(trackingsArray))
-  );
-  // chnage old urls to updated one with actual tracking codes
-  const updatedContent = update(catchUrls, addTrackingCodes, htmlCode);
-
-  //updated code with action from replaceActionsArray
-  const finalCode = grabContent(updatedContent).then(addCode(actions));
-  const completedTask = filterTask(finalCode, actions);
-  console.log(trackingsArray);
-  return { finalCode, completedTask };
+    //updated code with action from replaceActionsArray
+    const finalCode = grabContent(updatedContent).then(addCode(actions));
+    const completedTask = filterTask(finalCode, actions);
+    console.log(trackingsArray);
+    return { finalCode, completedTask };
+  }
 };
 
 const htmlValidation = html => {
-  // if empty return info
-  //check for doctype
-  // regex for head and body
-  // regex for urls
-  // if first error return one errorMessage
-  // if tree below false return errorMessage
+  if (!html) {
+    return `Don't forget to past you html code`;
+  }
+  const checkIfbody = regFor.body.test(html);
+  console.log("chech", checkIfbody);
+  const checkIfurls = regFor.url.test(html);
+  if (!checkIfbody || !checkIfurls) {
+    return `It is not html email, try again`;
+  } else return false;
 };
 
 const filterTask = (content, trackingCodes) => {
@@ -265,31 +270,31 @@ const addToHex = tracking => ({
 // ];
 
 // const reg exp obj
-export const regFor = {
-  pureCrm: /(CRM)/gi,
-  crm: /\?+(SRC|CMP=CRM|CRM|CMP=+([1-10]))\w+/gi,
-  img: /\"images\/|\('images\/|\("images\//gi,
-  heathrow: /(\.heathrow\.|\.heathrowexpress)/g,
-  heathrowExpres: /(\.heathrowexpress.)/g,
-  url: /href="(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/gi,
-  hash: /#([a-zA-z0-9\-_%](?!\?&))*/gi,
-  tid: /tid=([-a-zA-Z0-9@:%._&=+\-^%]*)\w+/gi,
-  recp: /recp=<%= targetData\.custId %>/g,
-  backgroundRewards2016: /(?=<!-- Outlook2016)[\s\S]*(<?10 Background END -------------------------------- -->)/g,
-  backgroundRewards2013: /(?=<!-- Outlook 2013)[\s\S]*(<?2007 Background End -------------------------------- -->)/g,
-  divFooter: /(?=<div class="gmailfix" style="white-space:nowrap; font:15px courier;)[\s\S]*(<?<\/div>)/g,
-  footer: /(?=<!-- TERMS)[\s\S]*(<?CONDITIONS END -->)/g,
-  tableLayout: /(style="table-layout:fixed;"|table-layout:fixed;|style="table-layout:fixed"|table-layout:fixed)/g,
-  unsub: /(<a href="#" _label="Unsubscribe_CTA")([\s\S]*?)(a> \|)|(<%@ include view='VIEW30' %>)/g
-};
-
-export const s = {
-  social: "<!-- SOCIAL ICONS END -->",
-  imgUrl: '"https://s3-eu-west-1.amazonaws.com/lhr-images/WR1551_',
-  empty: "",
-  unsub:
-    '<a href="#" PETER _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"><span style="color:#ffffff">Unsubscribe</span></a> |'
-};
+// export const regFor = {
+//   pureCrm: /(CRM)/gi,
+//   crm: /\?+(SRC|CMP=CRM|CRM|CMP=+([1-10]))\w+/gi,
+//   img: /\"images\/|\('images\/|\("images\//gi,
+//   heathrow: /(\.heathrow\.|\.heathrowexpress)/g,
+//   heathrowExpres: /(\.heathrowexpress.)/g,
+//   url: /href="(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/gi,
+//   hash: /#([a-zA-z0-9\-_%](?!\?&))*/gi,
+//   tid: /tid=([-a-zA-Z0-9@:%._&=+\-^%]*)\w+/gi,
+//   recp: /recp=<%= targetData\.custId %>/g,
+//   backgroundRewards2016: /(?=<!-- Outlook2016)[\s\S]*(<?10 Background END -------------------------------- -->)/g,
+//   backgroundRewards2013: /(?=<!-- Outlook 2013)[\s\S]*(<?2007 Background End -------------------------------- -->)/g,
+//   divFooter: /(?=<div class="gmailfix" style="white-space:nowrap; font:15px courier;)[\s\S]*(<?<\/div>)/g,
+//   footer: /(?=<!-- TERMS)[\s\S]*(<?CONDITIONS END -->)/g,
+//   tableLayout: /(style="table-layout:fixed;"|table-layout:fixed;|style="table-layout:fixed"|table-layout:fixed)/g,
+//   unsub: /(<a href="#" _label="Unsubscribe_CTA")([\s\S]*?)(a> \|)|(<%@ include view='VIEW30' %>)/g
+// };
+//
+// export const s = {
+//   social: "<!-- SOCIAL ICONS END -->",
+//   imgUrl: '"https://s3-eu-west-1.amazonaws.com/lhr-images/WR1551_',
+//   empty: "",
+//   unsub:
+//     '<a href="#" PETER _label="Unsubscribe_CTA" _category="T_G_HP" target="_blank" style="color:#ffffff; text-decoration:underline"><span style="color:#ffffff">Unsubscribe</span></a> |'
+// };
 
 // ADD CONST PART OF CODE - HR, HEX, WIFI, LHR
 // addingCodes experiment

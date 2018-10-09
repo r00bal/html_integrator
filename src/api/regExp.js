@@ -13,7 +13,8 @@ export const regFor = {
   divFooter: /(?=<div class="gmailfix" style="white-space:nowrap; font:15px courier;)[\s\S]*(<?<\/div>)/g,
   footer: /(?=<!-- TERMS)[\s\S]*(<?CONDITIONS END -->)/g,
   tableLayout: /(style="table-layout:fixed;"|table-layout:fixed;|style="table-layout:fixed"|table-layout:fixed)/g,
-  unsub: /(<a href="#" _label="Unsubscribe_CTA")([\s\S]*?)(a> \|)|(<%@ include view='VIEW30' %>)/g
+  unsub: /(<a href="#" _label="Unsubscribe_CTA")([\s\S]*?)(a> \|)|(<%@ include view='VIEW30' %>)/g,
+  body: /(<body)([\s\S]*?)(<\/body>)/g
 };
 
 export const s = {

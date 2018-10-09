@@ -4,7 +4,8 @@ import "./styles/css/style.css";
 
 export class TextArea extends Component {
   state = {
-    content: ""
+    content: "",
+    error: false
   };
   handleTextareaChange = event => {
     const value = event.target.value;
@@ -17,6 +18,12 @@ export class TextArea extends Component {
   handleFocus = event => {
     event.target.select();
   };
+
+  getDerivedStateFromProps(nextProps) {
+    if (nextProps.error) {
+      return { error: nextProps.error };
+    } else return null;
+  }
 
   render() {
     return (
