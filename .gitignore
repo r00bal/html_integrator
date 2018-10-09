@@ -5,7 +5,7 @@ node_modules
 
 # testing
 coverage
-./src/demo.html
+src/demo.html
 
 # production
 build
