@@ -2,9 +2,6 @@ import pandoraBox from "./error";
 
 // https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
 export const integrate = (stringCode, trackingCodes, actions) => {
-  //pandoraBox.reset()
-  console.log("fire");
-  console.log(stringCode);
   if (!stringCode) return;
 
   const htmlCode = stringCode;
@@ -25,6 +22,15 @@ export const integrate = (stringCode, trackingCodes, actions) => {
   const completedTask = filterTask(finalCode, actions);
   console.log(trackingsArray);
   return { finalCode, completedTask };
+};
+
+const htmlValidation = html => {
+  // if empty return info
+  //check for doctype
+  // regex for head and body
+  // regex for urls
+  // if first error return one errorMessage
+  // if tree below false return errorMessage
 };
 
 const filterTask = (content, trackingCodes) => {

@@ -111,7 +111,8 @@ class App extends Component {
 
     console.log("integrate!");
     const updatedContent = this.integrate(this.state.textarea);
-    console.log(updatedContent);
+    // use handling error functions
+    // if htmlValidation than update errorMessage
     if (!!updatedContent) {
       this.setState({
         updatedContent: updatedContent.finalCode,
