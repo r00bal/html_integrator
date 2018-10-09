@@ -42,7 +42,8 @@ class App extends Component {
       }));
       this.setState({
         radio: base,
-        checkbox
+        checkbox,
+        errorMessage: null
       });
     }
   };
@@ -100,7 +101,8 @@ class App extends Component {
 
   handleTextAreaChnage = textarea => {
     this.setState({
-      textarea
+      textarea,
+      errorMessage: null
     });
   };
 
@@ -110,11 +112,16 @@ class App extends Component {
     console.log("integrate!");
     const updatedContent = this.integrate(this.state.textarea);
     console.log(updatedContent);
-    this.setState({
-      updatedContent: updatedContent.finalCode,
-      completedTask: updatedContent.completedTask
-    });
-
+    if (!!updatedContent) {
+      this.setState({
+        updatedContent: updatedContent.finalCode,
+        completedTask: updatedContent.completedTask
+      });
+    } else {
+      this.setState({
+        errorMessage: `Don't forget to past your code first`
+      });
+    }
   };
 
   integrate = string => {
@@ -178,7 +185,11 @@ class App extends Component {
           </SelectContainer>
           <h2>Email Code</h2>
           <TextArea
-            copy={"Past your code here:"}
+            copy={
+              this.state.errorMessage
+                ? this.state.errorMessage
+                : "Past your code here:"
+            }
             onChange={this.handleTextAreaChnage}
           />
           <Button

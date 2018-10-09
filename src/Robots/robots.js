@@ -4,7 +4,9 @@ import pandoraBox from "./error";
 export const integrate = (stringCode, trackingCodes, actions) => {
   //pandoraBox.reset()
   console.log("fire");
-  console.log(actions);
+  console.log(stringCode);
+  if (!stringCode) return;
+
   const htmlCode = stringCode;
   const regex = regFor.url;
   // catch  all urls into array
@@ -21,7 +23,7 @@ export const integrate = (stringCode, trackingCodes, actions) => {
   //updated code with action from replaceActionsArray
   const finalCode = grabContent(updatedContent).then(addCode(actions));
   const completedTask = filterTask(finalCode, actions);
-  //  console.log([...completedTask]);
+  console.log(trackingsArray);
   return { finalCode, completedTask };
 };
 
